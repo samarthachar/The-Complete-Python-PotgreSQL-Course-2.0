@@ -27,3 +27,5 @@ while not (user_input := input(menu)).startswith("3"):
         
     else:
         print("Invalid option, please try again!")
+
+        
