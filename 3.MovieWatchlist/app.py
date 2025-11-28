@@ -1,3 +1,4 @@
+import datetime
 import database
 
 menu = """Please select one of the following options:
@@ -12,12 +13,22 @@ Your selection: """
 welcome = "Welcome to the watchlist app!"
 
 
+def prompt_add_movie():
+    title = input("Movie title:")
+    release_date = input("Release date (dd-mm-YYYY): ")
+    parsed_date = datetime.datetime.strptime(release_date, "%d-%m-%Y")
+    timestamp = parsed_date.timestamp()
+
+    database.add_movie(title, timestamp)
+
+
+
 print(welcome)
 database.create_tables()
 
 while (user_input := input(menu)) != "6":
     if user_input == "1":
-        pass
+        prompt_add_movie()
     elif user_input == "2":
         pass
     elif user_input == "3":
