@@ -5,9 +5,9 @@ connection = psycopg2.connect(url)
 
 cursor = connection.cursor()
 cursor.execute("SELECT * FROM users;")
-first_user = cursor.fetchall()
+first_user = cursor.fetchone()
 print(first_user)
 
-
+print(cursor.fetchall)
 
 connection.close()
