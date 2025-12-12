@@ -1,4 +1,5 @@
 from sql import *
+from psycopg2.extras import execute_values
 
 
 def create_tables(connection):
@@ -19,7 +20,8 @@ def get_polls(connection):
 def get_latest_poll(connection):
     with connection:
         with connection.cursor() as cursor:
-            pass
+            cursor.execute(SELECT_LATEST_POLL)
+            return cursor.fetchall()
 
 
 def get_poll_details(connection, poll_id):
@@ -38,14 +40,18 @@ def get_poll_and_vote_results(connection, poll_id):
 def get_random_poll_vote(connection, option_id):
     with connection:
         with connection.cursor() as cursor:
-            pass
-
+            cursor.execute(SELECT_RANDOM_VOTE, (option_id,))
+            return cursor.fetchone()1
 
 def create_poll(connection, title, owner, options):
     with connection:
         with connection.cursor() as cursor:
-            pass
+            cursor.execute(INSERT_POLL_RETURN_ID,(title,owner))
+            poll_id = cursor.fetchone()[0]
+            option_values = [(option_text, poll_id) for option_text in options]
 
+            execute_values(cursor, INSERT_OPTION, option_values)
+            
 
 def add_poll_vote(connection, username, option_id):
     with connection:

@@ -13,3 +13,11 @@ WHERE polls.id = %s;"""
 
 INSERT_OPTION = "INSERT INTO options (option_text, poll_id) VALUES %s;"
 INSERT_VOTE = "INSERT INTO votes (username, option_id) VALUES (%s, %s);"
+INSERT_POLL_RETURN_ID = "INSERT INTO polls (title, owner_username) VALUES (%s, %s) RETURNING id;"
+SELECT_LATEST_POLL = """SELECT * FROM polls
+JOIN options on polls.id = options.poll_id
+WHERE polls.id = (
+    SELECT id FROM polls ORDER BY id DESC LIMIT 1
+);"""
+
+SELECT_RANDOM_VOTE = "SELECT * FROM votes WHERE option_id = %s ORDER BY RANDOM() LIMIT 1;"
