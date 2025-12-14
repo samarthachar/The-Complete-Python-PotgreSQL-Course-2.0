@@ -21,3 +21,4 @@ WHERE polls.id = (
 );"""
 
 SELECT_RANDOM_VOTE = "SELECT * FROM votes WHERE option_id = %s ORDER BY RANDOM() LIMIT 1;"
+
