@@ -41,7 +41,7 @@ def get_random_poll_vote(connection, option_id):
     with connection:
         with connection.cursor() as cursor:
             cursor.execute(SELECT_RANDOM_VOTE, (option_id,))
-            return cursor.fetchone()1
+            return cursor.fetchone()
 
 def create_poll(connection, title, owner, options):
     with connection:
