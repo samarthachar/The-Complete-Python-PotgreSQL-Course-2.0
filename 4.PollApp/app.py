@@ -65,6 +65,7 @@ def show_poll_votes(connection):
             print(f"{option_text} got {count} votes ({percentage:.2f}% of total)")
 
 
+
 def randomize_poll_winner(connection):
     poll_id = int(input("Enter poll you'd like to pick a winner for: "))
     poll_options = database.get_poll_details(connection, poll_id)
