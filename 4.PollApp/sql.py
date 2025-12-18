@@ -31,3 +31,6 @@ LEFT JOIN votes ON options.id = votes.option_id
 WHERE options.poll_id = ?
 GROUP BY options.id;"""
 
+
+SELECT_ALL = "SELECT * FROM votes"
+
