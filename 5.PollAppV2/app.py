@@ -19,15 +19,15 @@ Enter your choice: """
 NEW_OPTION_PROMPT = "Enter new option text (or leave empty to stop adding options): "
 
 
-def prompt_create_poll(connection):
-    poll_title = input("Enter poll title: ")
-    poll_owner = input("Enter poll owner: ")
-    options = []
+
+def prompt_create_poll():
+    title = input("Enter poll title: ")
+    owner = input("Enter poll owner: ")
+    poll = Poll(title, owner)
+    poll.save()
 
     while (new_option := input(NEW_OPTION_PROMPT)):
-        options.append(new_option)
-
-    database.create_poll(connection, poll_title, poll_owner, options)
+        poll.add_option(new_option)
 
 
 def list_open_polls(connection):
