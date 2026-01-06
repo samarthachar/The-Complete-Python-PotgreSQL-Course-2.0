@@ -1,5 +1,6 @@
 from sql import *
 from psycopg2.extras import execute_values
+import random
 
 Poll = tuple[int, str, str]
 Option = tuple[int, str, int]
@@ -11,6 +12,7 @@ def create_tables(connection):
             cursor.execute(CREATE_POLLS)
             cursor.execute(CREATE_OPTIONS)
             cursor.execute(CREATE_VOTES)
+
 
 
 # -- Polls --
