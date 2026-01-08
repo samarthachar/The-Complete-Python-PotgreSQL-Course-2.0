@@ -38,7 +38,7 @@ class Poll:
             return [cls(poll[1], poll[2], poll[0]) for poll in polls]
     
     @classmethod
-    def latest(cls) -> "Poll":
+    def latest(cls):
         with get_connection() as connection:
             poll = database.get_latest_poll(connection)
             return cls(poll[1], poll[2], poll[0])

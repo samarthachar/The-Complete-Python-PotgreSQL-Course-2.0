@@ -20,4 +20,4 @@ def get_connection():
     try:
         yield connection
     finally:
-        pool.putconn(connection)
+        pool.putconn(connection) 

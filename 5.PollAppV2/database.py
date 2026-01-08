@@ -80,6 +80,6 @@ def get_votes_for_option(connection, option_id: int) -> List[Vote]:
             return cursor.fetchall()
 
 
-def add_poll_vote(connection, username: str, option_id: int):
+def add_poll_vote(connection, username: str, vote_timestamp: float, option_id: int):
     with get_cursor(connection) as cursor:
-            cursor.execute(INSERT_VOTE, (username, option_id))
+            cursor.execute(INSERT_VOTE, (username, option_id, vote_timestamp))

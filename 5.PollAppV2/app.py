@@ -3,7 +3,8 @@ from models.option import Option
 from models.poll import Poll
 from connection_pool import get_connection
 import random
-
+import datetime
+import pytz
 
 
 MENU_PROMPT = """-- Menu --
@@ -64,7 +65,18 @@ def show_poll_votes():
     except ZeroDivisionError:
         print("No votes cast for this poll yet")
 
+    vote_log = input("Would you like to see the vote log? (y/N)?")
+    if vote_log == "y":
+        _print_votes_for_options(options)
 
+def _print_votes_for_options(options: list[Option]):
+    for option in options:
+        print(f"-- {option.text} --")
+        for vote in option.votes:
+            naive_datetime = datetime.datetime.utcfromtimestamp(vote[2])
+            utc_date = pytz.utc.localize(naive_datetime)
+            local_date = utc_date.astimezone(pytz.timezone("Europe/London")).strftime("%Y-%m-%d %H:%M")
+            print(f"\t-{vote[0]} on {local_date}")
 
 def randomize_poll_winner():
     poll_id = int(input("Enter poll you'd like to pick a winner for: "))
