@@ -1,0 +1,4 @@
+LOCK TABLE users IN SHARE UPDATE EXCLUSIVE MODE;
+
+SELECT * FROM users WHERE email = 'rolf@example.com' FOR UPDATE;
+
